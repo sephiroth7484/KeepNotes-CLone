@@ -7,6 +7,14 @@
 
 KeepNotes-Clone is a backend-centric project that replicates the core functionalities of the Google Keep notes application. Leveraging my experience in backend development, this project aims to build a robust, scalable, and secure backend to manage notes, labels, and user data.
 
+## 🚧 In Progress
+
+Currently working on:
+- **REST API for Labels Management**: Creating APIs to add, update, and delete labels for note organization.
+- **Service Layer Refactor**: Refactoring the service layer for better code modularity and maintainability.
+- **JWT Authentication Integration**: Adding and refining JWT-based authentication for secure API access.
+- **Unit Testing**: Writing unit tests for `NotesController` and `NotesService` to ensure functionality and reliability.
+
 ## 🚀 Features
 
 - **User Authentication**: Implement secure login and registration with JWT-based authentication.
