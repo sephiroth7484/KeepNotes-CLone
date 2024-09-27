@@ -1,4 +1,4 @@
-package com.example.SpringPractice.controllerAdvice;
+package org.example.controllerAdvice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
