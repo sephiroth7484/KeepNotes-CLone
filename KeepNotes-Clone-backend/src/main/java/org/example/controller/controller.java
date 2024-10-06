@@ -31,10 +31,10 @@ public class controller {
         }
     }
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllModel(@RequestBody model m){
+    public ResponseEntity<?> getAllModel(){
         try{
-            List<model> amodels = this.seviceObj.getAllModels(m);
-            return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
+            List<model> models = this.seviceObj.getAllModels();
+            return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
         }catch (Exception e){
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }

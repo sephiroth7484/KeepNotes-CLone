@@ -1,9 +1,11 @@
 package org.example.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class model {
+    @Id
     long id;
     String heading;
     String description;
@@ -40,5 +42,6 @@ public class model {
                 ", description='" + description + '\'' +
                 '}';
     }
+
 
 }

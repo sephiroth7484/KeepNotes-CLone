@@ -19,7 +19,7 @@ public class serviceImpl implements service {
     }
 
     @Override
-    public List<model> getAllModels(model m) {
+    public List<model> getAllModels() {
         return this.JPARepoObj.findAll();
     }
 }

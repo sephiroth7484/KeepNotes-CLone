@@ -9,5 +9,5 @@ public interface service {
 
     void addModel(model m);
 
-    List<model> getAllModels(model m);
+    List<model> getAllModels();
 }
