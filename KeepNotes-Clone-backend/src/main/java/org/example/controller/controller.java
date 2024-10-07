@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/KN")
+@RequestMapping("/api/models")
 public class controller {
 
     @Autowired
-    service seviceObj;
+    service serviceObj;
 
     @GetMapping("/welcome")
     public String welcome(){
@@ -25,7 +25,7 @@ public class controller {
     @PostMapping("/add")
     public ResponseEntity<?> addModel(@RequestBody model m){
         try{
-            this.seviceObj.addModel(m);
+            this.serviceObj.addModel(m);
             return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
         }catch (Exception e){
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -34,7 +34,7 @@ public class controller {
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllModel(){
         try{
-            List<model> models = this.seviceObj.getAllModels();
+            List<model> models = this.serviceObj.getAllModels();
             return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
         }catch (Exception e){
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -44,11 +44,11 @@ public class controller {
     @GetMapping("/getById/{id}")
     public ResponseEntity<?> getById(@PathVariable long id){
         try{
-            Optional<model> fetchedModel = this.seviceObj.getModelById(id);
+            Optional<model> fetchedModel = this.serviceObj.getModelById(id);
             if ( fetchedModel.isPresent()) {
                 return new ResponseEntity<>(fetchedModel, HttpStatus.ACCEPTED);
             }else {
-                return new ResponseEntity<>("Model not found", HttpStatus.OK);
+                return new ResponseEntity<>("Model not found", HttpStatus.NOT_FOUND);
             }
         }catch (Exception e){
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -57,12 +57,12 @@ public class controller {
     @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<?> deleteById(@PathVariable long id){
         try{
-            Optional<model> fetchedModel = this.seviceObj.getModelById(id);
+            Optional<model> fetchedModel = this.serviceObj.getModelById(id);
             if ( fetchedModel.isPresent()) {
-                this.seviceObj.deleteModelById(id);
+                this.serviceObj.deleteModelById(id);
                 return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);
             }else {
-                return new ResponseEntity<>("Model not found", HttpStatus.OK);
+                return new ResponseEntity<>("Model not found", HttpStatus.NOT_FOUND);
             }
         }catch (Exception e){
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
