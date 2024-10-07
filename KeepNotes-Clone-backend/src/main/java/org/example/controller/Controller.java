@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,54 +19,40 @@ public class Controller {
     service serviceObj;
 
     @GetMapping("/welcome")
-    public String welcome(){
-        return "Welcome to keep Note";
+    public String welcome() {
+        return "Welcome to Keep Note";
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addModel(@RequestBody model m){
-        try{
-            this.serviceObj.addModel(m);
-            return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
-        }catch (Exception e){
-            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<String> addModel(@RequestBody model m) {
+        serviceObj.addModel(m);
+        return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
     }
+
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllModel(){
-        try{
-            List<model> models = this.serviceObj.getAllModels();
-            return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
-        }catch (Exception e){
-            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<List<model>> getAllModel() {
+        List<model> models = serviceObj.getAllModels();
+        return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<?> getById(@PathVariable long id){
-        try{
-            Optional<model> fetchedModel = this.serviceObj.getModelById(id);
-            if ( fetchedModel.isPresent()) {
-                return new ResponseEntity<>(fetchedModel, HttpStatus.ACCEPTED);
-            }else {
-                return new ResponseEntity<>("Model not found", HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<model> getById(@PathVariable long id) {
+        Optional<model> fetchedModel = serviceObj.getModelById(id);
+        if (fetchedModel.isPresent()) {
+            return new ResponseEntity<>(fetchedModel.get(), HttpStatus.ACCEPTED);
+        } else {
+            throw new EntityNotFoundException("Model with ID " + id + " not found");
         }
     }
+
     @DeleteMapping("/deleteById/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable long id){
-        try{
-            Optional<model> fetchedModel = this.serviceObj.getModelById(id);
-            if ( fetchedModel.isPresent()) {
-                this.serviceObj.deleteModelById(id);
-                return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);
-            }else {
-                return new ResponseEntity<>("Model not found", HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> deleteById(@PathVariable long id) {
+        Optional<model> fetchedModel = serviceObj.getModelById(id);
+        if (fetchedModel.isPresent()) {
+            serviceObj.deleteModelById(id);
+            return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);
+        } else {
+            throw new EntityNotFoundException("Model with ID " + id + " not found");
         }
     }
 }
