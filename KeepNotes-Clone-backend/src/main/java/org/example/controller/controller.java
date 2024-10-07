@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/KN")
@@ -39,4 +40,19 @@ public class controller {
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<?> getById(@PathVariable long id){
+        try{
+            Optional<model> fetchedModel = this.seviceObj.getModelById(id);
+            if ( fetchedModel.isPresent()) {
+                return new ResponseEntity<>(fetchedModel, HttpStatus.ACCEPTED);
+            }else {
+                return new ResponseEntity<>("Model not found", HttpStatus.OK);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
