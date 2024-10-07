@@ -13,4 +13,6 @@ public interface service {
     List<model> getAllModels();
 
     Optional<model> getModelById(long id);
+
+    void deleteModelById(long id);
 }

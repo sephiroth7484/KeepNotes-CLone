@@ -27,4 +27,9 @@ public class serviceImpl implements service {
     public Optional<model> getModelById(long id) {
         return this.JPARepoObj.findById(id);
     }
+
+    @Override
+    public void deleteModelById(long id) {
+        this.JPARepoObj.deleteById(id);
+    }
 }

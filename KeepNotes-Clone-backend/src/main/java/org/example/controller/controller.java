@@ -54,5 +54,18 @@ public class controller {
             return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable long id){
+        try{
+            Optional<model> fetchedModel = this.seviceObj.getModelById(id);
+            if ( fetchedModel.isPresent()) {
+                this.seviceObj.deleteModelById(id);
+                return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);
+            }else {
+                return new ResponseEntity<>("Model not found", HttpStatus.OK);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>("Error Occured:" + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
