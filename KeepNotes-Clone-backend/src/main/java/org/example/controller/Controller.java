@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/models")
-public class controller {
+public class Controller {
 
     @Autowired
     service serviceObj;
