@@ -29,7 +29,11 @@ public class Controller {
     // Add a Note
     @PostMapping("/add")
     public ResponseEntity<String> addModel(@RequestBody model m) {
-        serviceObj.addModel(m);
+        model entityModel = new model();
+        entityModel.setId(m.getId());
+        entityModel.setHeading(m.getHeading());
+        entityModel.setDescription(m.getDescription());
+        this.serviceObj.addModel(entityModel);
         return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
     }
 
