@@ -1,6 +1,6 @@
 package org.example.services;
 
-import org.example.model.model;
+import org.example.model.modelDTO;
 import org.example.repository.repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +14,17 @@ public class serviceImpl implements service {
     @Autowired
     repo JPARepoObj;
     @Override
-    public void addModel(model m) {
+    public void addModel(modelDTO m) {
     this.JPARepoObj.save(m);
     }
 
     @Override
-    public List<model> getAllModels() {
+    public List<modelDTO> getAllModels() {
         return this.JPARepoObj.findAll();
     }
 
     @Override
-    public Optional<model> getModelById(long id) {
+    public Optional<modelDTO> getModelById(long id) {
         return this.JPARepoObj.findById(id);
     }
 

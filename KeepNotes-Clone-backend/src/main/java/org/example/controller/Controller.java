@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.model.model;
+import org.example.model.modelDTO;
 import org.example.services.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,11 +28,11 @@ public class Controller {
 
     // Add a Note
     @PostMapping("/add")
-    public ResponseEntity<String> addModel(@RequestBody model m) {
-        model entityModel = new model();
-        entityModel.setId(m.getId());
-        entityModel.setHeading(m.getHeading());
-        entityModel.setDescription(m.getDescription());
+    public ResponseEntity<String> addModel(@RequestBody modelDTO modelDTO) {
+        modelDTO entityModel = new modelDTO();
+        entityModel.setId(modelDTO.getId());
+        entityModel.setHeading(modelDTO.getHeading());
+        entityModel.setDescription(modelDTO.getDescription());
         this.serviceObj.addModel(entityModel);
         return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
     }
@@ -41,17 +41,17 @@ public class Controller {
 
     //Get All Note
     @GetMapping("/getAll")
-    public ResponseEntity<List<model>> getAllModel() {
-        List<model> models = serviceObj.getAllModels();
-        return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
+    public ResponseEntity<List<modelDTO>> getAllModel() {
+        List<modelDTO> modelDTOS = serviceObj.getAllModels();
+        return new ResponseEntity<>(modelDTOS, HttpStatus.ACCEPTED);
     }
 
 
 
     // Get a note by id
     @GetMapping("/getById/{id}")
-    public ResponseEntity<model> getById(@PathVariable long id) {
-        Optional<model> fetchedModel = serviceObj.getModelById(id);
+    public ResponseEntity<modelDTO> getById(@PathVariable long id) {
+        Optional<modelDTO> fetchedModel = serviceObj.getModelById(id);
         if (fetchedModel.isPresent()) {
             return new ResponseEntity<>(fetchedModel.get(), HttpStatus.ACCEPTED);
         } else {
@@ -64,7 +64,7 @@ public class Controller {
     //Delete a note by id
     @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<String> deleteById(@PathVariable long id) {
-        Optional<model> fetchedModel = serviceObj.getModelById(id);
+        Optional<modelDTO> fetchedModel = serviceObj.getModelById(id);
         if (fetchedModel.isPresent()) {
             serviceObj.deleteModelById(id);
             return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);

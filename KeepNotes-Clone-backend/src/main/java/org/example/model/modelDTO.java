@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class model {
+public class modelDTO {
     @Id
     long id;
     String heading;
