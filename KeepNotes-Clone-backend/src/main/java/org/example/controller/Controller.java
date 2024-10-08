@@ -43,7 +43,7 @@ public class Controller {
     @GetMapping("/getAll")
     public ResponseEntity<List<modelDTO>> getAllModel() {
         List<modelDTO> modelDTOS = serviceObj.getAllModels();
-        return new ResponseEntity<>(modelDTOS, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(modelDTOS, HttpStatus.OK);
     }
 
 
