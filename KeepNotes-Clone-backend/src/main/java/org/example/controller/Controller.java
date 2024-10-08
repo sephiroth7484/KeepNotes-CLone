@@ -34,7 +34,7 @@ public class Controller {
         entityModel.setHeading(modelDTO.getHeading());
         entityModel.setDescription(modelDTO.getDescription());
         this.serviceObj.addModel(entityModel);
-        return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Model Added Successfully", HttpStatus.OK);
     }
 
 
