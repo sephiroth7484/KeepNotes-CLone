@@ -18,23 +18,33 @@ public class Controller {
     @Autowired
     service serviceObj;
 
+    // Trial API endpoint
     @GetMapping("/welcome")
     public String welcome() {
         return "Welcome to Keep Note";
     }
 
+
+
+    // Add a Note
     @PostMapping("/add")
     public ResponseEntity<String> addModel(@RequestBody model m) {
         serviceObj.addModel(m);
         return new ResponseEntity<>("Model Added Successfully", HttpStatus.ACCEPTED);
     }
 
+
+
+    //Get All Note
     @GetMapping("/getAll")
     public ResponseEntity<List<model>> getAllModel() {
         List<model> models = serviceObj.getAllModels();
         return new ResponseEntity<>(models, HttpStatus.ACCEPTED);
     }
 
+
+
+    // Get a note by id
     @GetMapping("/getById/{id}")
     public ResponseEntity<model> getById(@PathVariable long id) {
         Optional<model> fetchedModel = serviceObj.getModelById(id);
@@ -45,6 +55,9 @@ public class Controller {
         }
     }
 
+
+
+    //Delete a note by id
     @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<String> deleteById(@PathVariable long id) {
         Optional<model> fetchedModel = serviceObj.getModelById(id);
