@@ -67,7 +67,7 @@ public class Controller {
         Optional<modelDTO> fetchedModel = serviceObj.getModelById(id);
         if (fetchedModel.isPresent()) {
             serviceObj.deleteModelById(id);
-            return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Model Deleted Successfully", HttpStatus.OK);
         } else {
             throw new EntityNotFoundException("Model with ID " + id + " not found");
         }
