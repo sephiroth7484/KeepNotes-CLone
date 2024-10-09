@@ -72,4 +72,19 @@ public class Controller {
             throw new EntityNotFoundException("Model with ID " + id + " not found");
         }
     }
+
+    @PutMapping("/editById/{id}")
+    public ResponseEntity<String> editModel(@PathVariable long id, @RequestBody modelDTO modelDTO) {
+        Optional<modelDTO> fetchedModel = serviceObj.getModelById(id);
+        if (fetchedModel.isPresent()) {
+            modelDTO existingModel= fetchedModel.get();
+
+            existingModel.setHeading(modelDTO.getHeading());
+            existingModel.setDescription(modelDTO.getDescription());
+            serviceObj.editModel(existingModel);
+            return new ResponseEntity<>("Model Updated Successfully", HttpStatus.OK);
+        } else {
+            throw new EntityNotFoundException("Model with details " + modelDTO.getId() + " not found");
+        }
+    }
 }

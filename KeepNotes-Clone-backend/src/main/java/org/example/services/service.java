@@ -15,4 +15,6 @@ public interface service {
     Optional<modelDTO> getModelById(long id);
 
     void deleteModelById(long id);
+
+    void editModel(modelDTO updatedModel);
 }
