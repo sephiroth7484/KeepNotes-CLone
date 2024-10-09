@@ -36,20 +36,8 @@ public class serviceImpl implements service {
 
     @Override
     public void editModel(modelDTO updatedModelDTO) {
-        Optional<modelDTO> optionalModel = this.JPARepoObj.findById(updatedModelDTO.getId());
 
-        if (optionalModel.isPresent()) {
-            modelDTO existingModel = optionalModel.get();
-
-            // Update the fields of the existing model with the new data from updatedModelDTO
-            existingModel.setHeading(updatedModelDTO.getHeading());  // Update fields
-            existingModel.setDescription(updatedModelDTO.getDescription());
-
-            // Save the updated model back to the repository
-            this.JPARepoObj.save(existingModel);
-        } else {
-            throw new EntityNotFoundException("Model with id " + updatedModelDTO.getId() + " not found.");
-        }
+            this.JPARepoObj.save(updatedModelDTO);
     }
 
 }
